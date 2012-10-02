@@ -1,4 +1,4 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 
 setup(
     name='thebot-instagram',
@@ -17,7 +17,7 @@ setup(
         'License :: OSI Approved :: BSD License',
         'Programming Language :: Python',
     ],
-    packages=find_packages(),
+    py_modules=['thebot_instagram'],
     install_requires=[
         'thebot',
         'python-instagram',

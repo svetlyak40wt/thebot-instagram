@@ -12,12 +12,6 @@ class Plugin(thebot.Plugin):
     # each 15 minutes
     INTERVAL = 60 * 15
 
-    def get_callbacks(self):
-        return [
-            ('instagram on', self.on),
-            ('instagram off', self.off),
-        ]
-
     def worker(self):
         api = InstagramAPI(client_id='1a748d8ab1ad48ab8e97b63c5d962355', client_secret='c9388c7acb064b779a7e5a3b4c5a7c12')
         countdown = 0
@@ -35,7 +29,9 @@ class Plugin(thebot.Plugin):
 
         self._request.respond('instagram was turned off')
 
-    def on(self, request, match):
+
+    @thebot.route('instagram on')
+    def on(self, request):
         thread = getattr(self, '_thread', None)
         if thread is not None and thread.is_alive():
             return
@@ -48,7 +44,8 @@ class Plugin(thebot.Plugin):
 
         request.respond('instagram was turned on')
 
-    def off(self, request, match):
+    @thebot.route('instagram off')
+    def off(self, request):
         event = getattr(self, '_event', None)
         if event is not None:
             event.set()

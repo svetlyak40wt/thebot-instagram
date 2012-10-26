@@ -23,7 +23,14 @@ class Plugin(ThreadedPlugin):
         api = InstagramAPI(client_id='1a748d8ab1ad48ab8e97b63c5d962355', client_secret='c9388c7acb064b779a7e5a3b4c5a7c12')
         photos = api.media_popular(count=20)
         photo = random.choice(photos)
-        self._request.shout(photo.images['standard_resolution'].url)
+
+        self._request.shout(
+            '"{caption}" by {user}: {url}'.format(
+                url=photo.link,
+                user=photo.user.full_name,
+                caption=photo.caption.text,
+            )
+        )
 
     def on_start(self):
         self.storage['on'] = True

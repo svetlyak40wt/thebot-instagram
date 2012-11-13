@@ -7,6 +7,7 @@ from thebot import ThreadedPlugin, on_command
 
 
 class Plugin(ThreadedPlugin):
+    """Fetches images from instagram."""
     # each 15 minutes
     DEFAULT_INTERVAL = 60 * 15
 
